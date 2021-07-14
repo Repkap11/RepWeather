@@ -1,12 +1,12 @@
 package com.repkap11.repweather.api;
 
-import com.repkap11.repweather.api.rest.CurrentWeather;
+import com.repkap11.repweather.api.rest.Weather;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface Weather {
+public interface CurrentWeather {
     @GET("weather/current/zip/{zip}")
-    Call<CurrentWeather> getCurrentWeather(@Path("zip") String zip);
+    Call<Weather> getCurrentWeather(@Path("zip") String zip);
 }

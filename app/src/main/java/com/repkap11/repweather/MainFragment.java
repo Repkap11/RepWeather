@@ -14,10 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.repkap11.repweather.api.Weather;
-import com.repkap11.repweather.api.rest.CurrentWeather;
+import com.repkap11.repweather.api.CurrentWeather;
+import com.repkap11.repweather.api.rest.Weather;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -31,7 +32,7 @@ public class MainFragment extends Fragment {
     private Handler mMainHandler;
     private State mState;
     private Ui mUi;
-    private Weather mWeather;
+    private CurrentWeather mCurrentWeather;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MainFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
-        mWeather = retrofit.create(Weather.class);
+        mCurrentWeather = retrofit.create(CurrentWeather.class);
 
 
         super.onCreate(savedInstanceState);
@@ -74,10 +75,14 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 mBackgroundHandler.post(() -> {
                     try {
-                        CurrentWeather currentWeather = mWeather.getCurrentWeather("14586").execute().body();
-                        if (currentWeather != null) {
+                        Weather weather = mCurrentWeather.getCurrentWeather("14586").execute().body();
+                        if (weather != null) {
                             mMainHandler.post(() -> {
-                                mState.message = currentWeather.name;
+                                DecimalFormat df = new DecimalFormat("#.0");
+                                double temp = weather.main.temp;
+                                double fahrenheit = deci_c_to_f(temp);
+                                double celsius = deci_c_to_c(temp);
+                                mState.message = "Temperature in:" + weather.name + ": " + df.format(celsius) + " C or " + df.format(fahrenheit) + " F";
                                 updateUi();
                             });
                         }
@@ -90,6 +95,14 @@ public class MainFragment extends Fragment {
         });
         updateUi();
         return rootView;
+    }
+
+    private double deci_c_to_f(double temp_deci_c) {
+        return (9.0 / 5.0) * (temp_deci_c / 10.0) + 32.0;
+    }
+
+    private double deci_c_to_c(double temp_deci_c) {
+        return (temp_deci_c / 10.0);
     }
 
     @Override
