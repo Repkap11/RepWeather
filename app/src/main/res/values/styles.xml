@@ -2,7 +2,7 @@
 <resources>
 
     <style name="widget_text_base_style">
-        <item name="android:textStyle">bold|italic</item>
         <item name="android:textColor">?attr/appWidgetTextColor</item>
+        <item name="android:autoSizeTextType">uniform</item>
     </style>
 </resources>
