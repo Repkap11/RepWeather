@@ -52,11 +52,13 @@ public class CurrentWeatherWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.current_weather_widget);
-        views.setTextViewText(R.id.widget_location, weather.name);
+        views.setTextViewText(R.id.widget_location, weather.name + " ");
         DecimalFormat df = new DecimalFormat("#.0");
         views.setTextViewText(R.id.widget_temp_c, df.format(k_to_c(weather.main.temp)) + "°C");
         views.setTextViewText(R.id.widget_temp_f, df.format(k_to_f(weather.main.temp)) + "°F");
-        views.setTextViewText(R.id.widget_cloud_cover, "Cloudiness:  " + weather.clouds.all + "%");
+
+        views.setTextViewText(R.id.widget_wind, "Wind:  " + df.format(weather.wind.speed) + "m/s  " + df.format(m_s_to_mph(weather.wind.speed)) + "mph ");
+        views.setTextViewText(R.id.widget_cloud_cover, " Cloudiness:  " + weather.clouds.all + "%");
         File iconFile = iconNameToFile(context.getApplicationContext(), weather.weather.get(0).icon);
         Bitmap iconBitmap = BitmapFactory.decodeFile(iconFile.getAbsolutePath());
         views.setImageViewBitmap(R.id.widget_icon, iconBitmap);
@@ -69,10 +71,14 @@ public class CurrentWeatherWidget extends AppWidgetProvider {
         String dateString = dateFormat.format(date);
         Log.i(TAG, "updateAppWidget: timestamp:" + unixTimeLong + " DateString:" + dateString);
 
-        views.setTextViewText(R.id.widget_last_update, dateString);
+        views.setTextViewText(R.id.widget_last_update, " " + dateString);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    private static double m_s_to_mph(double mps) {
+        return 2.24 * mps;
     }
 
     public static File iconNameToFile(Context context, String iconName) {

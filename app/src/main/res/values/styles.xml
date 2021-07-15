@@ -4,5 +4,7 @@
     <style name="widget_text_base_style">
         <item name="android:textColor">?attr/appWidgetTextColor</item>
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:lines">1</item>
+        <item name="android:autoSizeMinTextSize">8sp</item>
     </style>
 </resources>
