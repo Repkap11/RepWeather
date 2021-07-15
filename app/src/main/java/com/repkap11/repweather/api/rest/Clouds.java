@@ -13,6 +13,6 @@ public class Clouds {
      */
     @SerializedName("all")
     @Expose
-    public Float all;
+    public Integer all;
 
 }

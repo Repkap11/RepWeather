@@ -56,12 +56,11 @@ public class CurrentWeatherWidget extends AppWidgetProvider {
         DecimalFormat df = new DecimalFormat("#.0");
         views.setTextViewText(R.id.widget_temp_c, df.format(k_to_c(weather.main.temp)) + "°C");
         views.setTextViewText(R.id.widget_temp_f, df.format(k_to_f(weather.main.temp)) + "°F");
-        views.setTextViewText(R.id.widget_cloud_cover, "Cloudiness:  " + weather.clouds.all * 100 + "%");
+        views.setTextViewText(R.id.widget_cloud_cover, "Cloudiness:  " + weather.clouds.all + "%");
         File iconFile = iconNameToFile(context.getApplicationContext(), weather.weather.get(0).icon);
-        Log.i(TAG, "updateAppWidget: iconPath:" + iconFile.getAbsolutePath() + " exists:" + iconFile.exists());
         Bitmap iconBitmap = BitmapFactory.decodeFile(iconFile.getAbsolutePath());
-        Log.i(TAG, "updateAppWidget: icon:" + iconBitmap);
         views.setImageViewBitmap(R.id.widget_icon, iconBitmap);
+        views.setTextViewText(R.id.widget_icon_label, weather.weather.get(0).main);
 
 
         long unixTimeLong = Long.parseLong(unixTime);
