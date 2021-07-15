@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="widget_text_base_style">
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textColor">?attr/appWidgetTextColor</item>
+    </style>
+</resources>

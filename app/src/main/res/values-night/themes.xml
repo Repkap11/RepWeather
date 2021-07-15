@@ -15,7 +15,7 @@
     </style>
 
     <style name="ThemeOverlay.RepWeather.AppWidgetContainer" parent="">
-        <item name="appWidgetBackgroundColor">@color/light_blue_900</item>
-        <item name="appWidgetTextColor">@color/light_blue_200</item>
+        <item name="appWidgetBackgroundColor">@android:color/black</item>
+        <item name="appWidgetTextColor">@color/rep_darker_red</item>
     </style>
 </resources>

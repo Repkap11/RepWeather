@@ -80,8 +80,8 @@ public class MainFragment extends Fragment {
                             mMainHandler.post(() -> {
                                 DecimalFormat df = new DecimalFormat("#.0");
                                 double temp = weather.main.temp;
-                                double fahrenheit = deci_c_to_f(temp);
-                                double celsius = deci_c_to_c(temp);
+                                double fahrenheit = k_to_f(temp);
+                                double celsius = k_to_c(temp);
                                 mState.message = "Temperature in:" + weather.name + ": " + df.format(celsius) + " C or " + df.format(fahrenheit) + " F";
                                 updateUi();
                             });
@@ -97,12 +97,12 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
-    private double deci_c_to_f(double temp_deci_c) {
-        return (9.0 / 5.0) * (temp_deci_c / 10.0) + 32.0;
+    private double k_to_f(double temp_k) {
+        return (9.0 / 5.0) * k_to_c(temp_k) + 32.0;
     }
 
-    private double deci_c_to_c(double temp_deci_c) {
-        return (temp_deci_c / 10.0);
+    private double k_to_c(double temp_k) {
+        return (temp_k - 273.15);
     }
 
     @Override
