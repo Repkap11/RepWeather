@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.repkap11.repweather.api.CurrentWeather;
 import com.repkap11.repweather.api.rest.Weather;
+import com.repkap11.repweather.widget.CurrentWeatherWidget;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -53,6 +54,12 @@ public class MainFragment extends Fragment {
 
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        CurrentWeatherWidget.queueWork(requireContext(), true);
     }
 
     @Override

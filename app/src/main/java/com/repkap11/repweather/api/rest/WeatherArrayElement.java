@@ -5,38 +5,32 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Weather {
+public class WeatherArrayElement {
 
     /**
      * (Required)
      */
-    @SerializedName("coord")
+    @SerializedName("id")
     @Expose
-    public Coord coord;
-    /**
-     * (Required)
-     */
-    @SerializedName("weather")
-    @Expose
-    public List<WeatherArrayElement> weather = null;
-    /**
-     * (Required)
-     */
-    @SerializedName("base")
-    @Expose
-    public String base;
+    public Integer id;
     /**
      * (Required)
      */
     @SerializedName("main")
     @Expose
-    public Main main;
+    public String main;
     /**
      * (Required)
      */
-    @SerializedName("visibility")
+    @SerializedName("description")
     @Expose
-    public Integer visibility;
+    public String description;
+    /**
+     * (Required)
+     */
+    @SerializedName("icon")
+    @Expose
+    public String icon;
     /**
      * (Required)
      */
@@ -67,12 +61,6 @@ public class Weather {
     @SerializedName("timezone")
     @Expose
     public Integer timezone;
-    /**
-     * (Required)
-     */
-    @SerializedName("id")
-    @Expose
-    public Integer id;
     /**
      * (Required)
      */
